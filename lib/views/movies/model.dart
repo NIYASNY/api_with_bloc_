@@ -1,21 +1,3 @@
-// class MovieModel {
-//   late String image, title, subtitle;
-//   late double rate;
-
-//   MovieModel(
-//       {required this.title,
-//       required this.subtitle,
-//       required this.image,
-//       required this.rate});
-
-//   MovieModel.fromMap(Map<String, dynamic> map) {
-//     image = "https://image.tmdb.org/t/p/w500${map["backdrop_path"]}";
-//     title = map["original_title"];
-//     subtitle = map["overview"];
-//     rate = map["vote_average"];
-//   }
-// }
-
 class MoviesData {
   late final int page, totalPages, totalResults;
   late final List<MovieModel> list;
@@ -54,7 +36,7 @@ class MovieModel {
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
     overview = json['overview'];
-    posterPath = json['poster_path'];
+    posterPath = json['poster_path'].toString();
     mediaType = json['media_type'];
     genreIds = List.castFrom<dynamic, int>(json['genre_ids']);
     popularity = json['popularity'];
