@@ -17,8 +17,7 @@ class MoviesCubit extends Cubit<MoviesStates> {
     } else {
       emit(GetMoviesLoadingStates());
     }
-    try {
-      var response = await Dio().get(
+    try {     var response = await Dio().get(
           'https://api.themoviedb.org/3/trending/movie/day?api_key=3c68dd7dff00ba8ba33d7f88d1c3ea39&page=$pageNumber');
       var model = MoviesData.fromJson(response.data);
       if (response.statusCode == 200) {
@@ -30,8 +29,6 @@ class MoviesCubit extends Cubit<MoviesStates> {
       if (fromLoading) {
         if (ex.response?.statusCode == 404) {
           emit(GetMoviesFromPaginationFailedStates(msg: 'Resource not found'));
-        } else if (ex.response?.statusCode == 401) {
-          emit(GetMoviesFromPaginationFailedStates(msg: 'Invalid Api key'));
         } else {
           emit(GetMoviesFromPaginationFailedStates(
               msg:
@@ -39,10 +36,7 @@ class MoviesCubit extends Cubit<MoviesStates> {
         }
         await Future.delayed(Duration(seconds: 1));
         emit(GetMoviesinitialStates());
-      } else {
-        emit(GetMoviesFailedStates(msg: ex.toString()));
-      }
-
+      } 
       // if (fromLoading) {
       //   emit(GetMoviesFromPaginationFailedStates(
       //       msg: ex.response!.data["errors"]));
